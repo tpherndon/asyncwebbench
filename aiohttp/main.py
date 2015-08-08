@@ -17,7 +17,7 @@ def handle(request):
         assert isinstance(data[key], (str, bytes))
     resp = {"status_code": 200, "status_txt": "OK", "data": data}
     text = json.dumps(resp)
-    return web.Response(body=text.encode('utf-8'))
+    return web.Response(body=text.encode('utf-8'), content_type='application/json; charset=utf-8')
 
 
 @asyncio.coroutine
