@@ -1,0 +1,242 @@
+    upstream flask {
+        server unix:/tmp/flask.sock fail_timeout=0;
+        # For a TCP configuration:
+        # server 192.168.0.7:8000 fail_timeout=0;
+    }
+
+    server {
+        listen 18000;
+        client_max_body_size 4G;
+        server_name _;
+        access_log off;
+
+        keepalive_timeout 45;
+
+        # path for static files
+        root /tmp;
+
+        location / {
+            # checks for static file, if not found proxy to app
+            try_files $uri @proxy_to_app;
+        }
+
+        location @proxy_to_app {
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header Host $http_host;
+            proxy_redirect off;
+
+            proxy_pass   http://flask;
+        }
+
+        error_page 500 502 503 504 /500.html;
+        location = /500.html {
+            root /tmp;
+        }
+    }
+    
+
+    upstream flask_uwsgi {
+        server unix:/tmp/flask_uwsgi.sock fail_timeout=0;
+        # For a TCP configuration:
+        # server 192.168.0.7:8000 fail_timeout=0;
+    }
+
+    server {
+        listen 28000;
+        client_max_body_size 4G;
+        server_name _;
+        access_log off;
+
+        keepalive_timeout 45;
+
+        # path for static files
+        root /tmp;
+
+        location / {
+            # checks for static file, if not found proxy to app
+            try_files $uri @proxy_to_app;
+        }
+
+        location @proxy_to_app {
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header Host $http_host;
+            proxy_redirect off;
+
+            proxy_pass   http://flask_uwsgi;
+        }
+
+        error_page 500 502 503 504 /500.html;
+        location = /500.html {
+            root /tmp;
+        }
+    }
+
+    upstream go {
+        server 192.168.0.7:11000 fail_timeout=0;
+    }
+
+    server {
+        listen 28500;
+        client_max_body_size 4G;
+        server_name _;
+        access_log off;
+
+        keepalive_timeout 45;
+
+        # path for static files
+        root /tmp;
+
+        location / {
+            # checks for static file, if not found proxy to app
+            try_files $uri @proxy_to_app;
+        }
+
+        location @proxy_to_app {
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header Host $http_host;
+            proxy_redirect off;
+
+            proxy_pass   http://go;
+        }
+
+        error_page 500 502 503 504 /500.html;
+        location = /500.html {
+            root /tmp;
+        }
+    }
+
+    upstream tornado2 {
+        server 192.168.0.7:9000 fail_timeout=0;
+    }
+
+    server {
+        listen 28600;
+        client_max_body_size 4G;
+        server_name _;
+        access_log off;
+
+        keepalive_timeout 45;
+
+        # path for static files
+        root /tmp;
+
+        location / {
+            # checks for static file, if not found proxy to app
+            try_files $uri @proxy_to_app;
+        }
+
+        location @proxy_to_app {
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header Host $http_host;
+            proxy_redirect off;
+
+            proxy_pass   http://tornado2;
+        }
+
+        error_page 500 502 503 504 /500.html;
+        location = /500.html {
+            root /tmp;
+        }
+    }
+
+    upstream tornado3 {
+        server 192.168.0.7:10000 fail_timeout=0;
+    }
+
+    server {
+        listen 28700;
+        client_max_body_size 4G;
+        server_name _;
+        access_log off;
+
+        keepalive_timeout 45;
+
+        # path for static files
+        root /tmp;
+
+        location / {
+            # checks for static file, if not found proxy to app
+            try_files $uri @proxy_to_app;
+        }
+
+        location @proxy_to_app {
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header Host $http_host;
+            proxy_redirect off;
+
+            proxy_pass   http://tornado3;
+        }
+
+        error_page 500 502 503 504 /500.html;
+        location = /500.html {
+            root /tmp;
+        }
+    }
+
+    upstream tornadopypy {
+        server 192.168.0.7:8500 fail_timeout=0;
+    }
+
+    server {
+        listen 28800;
+        client_max_body_size 4G;
+        server_name _;
+        access_log off;
+
+        keepalive_timeout 45;
+
+        # path for static files
+        root /tmp;
+
+        location / {
+            # checks for static file, if not found proxy to app
+            try_files $uri @proxy_to_app;
+        }
+
+        location @proxy_to_app {
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header Host $http_host;
+            proxy_redirect off;
+
+            proxy_pass   http://tornadopypy;
+        }
+
+        error_page 500 502 503 504 /500.html;
+        location = /500.html {
+            root /tmp;
+        }
+    }
+
+    upstream aiohttp {
+        server 192.168.0.7:7000 fail_timeout=0;
+    }
+
+    server {
+        listen 28900;
+        client_max_body_size 4G;
+        server_name _;
+        access_log off;
+
+        keepalive_timeout 45;
+
+        # path for static files
+        root /tmp;
+
+        location / {
+            # checks for static file, if not found proxy to app
+            try_files $uri @proxy_to_app;
+        }
+
+        location @proxy_to_app {
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header Host $http_host;
+            proxy_redirect off;
+
+            proxy_pass   http://aiohttp;
+        }
+
+        error_page 500 502 503 504 /500.html;
+        location = /500.html {
+            root /tmp;
+        }
+    }
