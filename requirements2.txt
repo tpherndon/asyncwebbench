@@ -10,7 +10,7 @@ itsdangerous==0.24
 Jinja2==2.7.3
 MarkupSafe==0.23
 python-mimeparse==0.1.4
-readline=6.2.4.1
+readline==6.2.4.1
 six==1.9.0
 tornado==4.2.1
 ujson==1.33
