@@ -16,7 +16,7 @@ type APIResponse struct {
 
 func main() {
 	var (
-		port = flag.Int("port", 8000, "port on which to listen for incoming http requests")
+		port = flag.Int("port", 11000, "port on which to listen for incoming http requests")
 	)
 
 	flag.Parse()

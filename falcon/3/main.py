@@ -27,10 +27,10 @@ class QueryParamResource(object):
         resp.set_header('Content-Type', 'application/json; charset=utf-8')
         resp.body = resp_json
 
-app = falcon.API()
+application = falcon.API()
 query_handler = QueryParamResource()
-app.add_route('/', query_handler)
+application.add_route('/', query_handler)
 
 if __name__ == '__main__' and dev_server:
-    httpd = simple_server.make_server('127.0.0.1', 8000, app)
+    httpd = simple_server.make_server('127.0.0.1', 8000, application)
     httpd.serve_forever()

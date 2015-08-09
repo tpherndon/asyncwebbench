@@ -26,8 +26,8 @@ def init(loop):
     app.router.add_route('GET', '/', handle)
 
     srv = yield from loop.create_server(app.make_handler(),
-                                        '127.0.0.1', 8080)
-    print("Server started at http://127.0.0.1:8080")
+                                        '127.0.0.1', 7000)
+    print("Server started at http://127.0.0.1:7000")
     return srv
 
 loop = asyncio.get_event_loop()
